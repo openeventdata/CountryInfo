@@ -8,7 +8,15 @@ import fire
 import json
 
 def ciParse(tagSoup):
-    return([line.strip() for line in tagSoup.text.split('\n') if line.strip() != ''])
+    text = tagSoup.text
+    text = text.replace('.','')
+    text = re.sub(r'\[[^\[\]]+\]','',text)
+    text = re.sub(r'#[A-Za-z ]*','',text)
+    values = re.findall(r'\b[A-Z_]+\b',text)
+    values = [v.lower().replace('_',' ').strip() for v in values]
+    return(values)
+    # 1 Detect format
+    # 2 reparse into list of dictionaries
 
 def soupLeaf(tagSoup):
     if len(tagSoup) == 1:
@@ -28,8 +36,10 @@ def soupBranch(tagSoup):
     return(tagCont)
 
 def cookXml(filePath,rootTag,outFile):
+
     if not os.path.isfile(filePath) and len(sys.argv) == 3:
-        print('Usage: toJson.py [file path] [root tag]')
+        sys.stderr.write('Usage: toJson.py [file path] [root tag]')
+        sys.stderr.write('if file path is .stdout, the program writes to stdout')
 
     with open(filePath) as file:
         raw = file.read()
@@ -44,8 +54,11 @@ def cookXml(filePath,rootTag,outFile):
         d = {t.name : soupBranch(rootTag.find(t.name)) for t in tags}
         res.update({ccode:d})
 
-    with open(outFile,'w') as file:
-        json.dump(res,file)
+    if outFile == '.stdout':
+        sys.stdout.write(json.dumps(res))
+    else:
+        with open(outFile,'w') as file:
+            json.dump(res,file)
 
 if __name__ == '__main__':
 
