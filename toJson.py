@@ -44,6 +44,8 @@ def cookXml(filePath,rootTag,outFile):
     with open(filePath) as file:
         raw = file.read()
 
+    raw = re.sub(r'\s(?=[\s\w]*>)','_',raw)
+
     soup = bs(raw,'html.parser')
     rootTags = soup.findAll(rootTag)
 
