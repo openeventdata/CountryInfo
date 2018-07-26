@@ -27,3 +27,8 @@ dict.countrycodes.pl:
 This Perl program combines the generic international code file CountryCodes.txt and
 individual country files for the ICEWS countries, and produces a TABARI-compatible
 file International.draft.actors.
+
+######################################
+
+I added a parser to convert this file to the JSON format.
+
