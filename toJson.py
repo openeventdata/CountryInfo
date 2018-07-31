@@ -11,7 +11,7 @@ def ciParse(tagSoup):
     text = tagSoup.text
     text = text.replace('.','')
     text = re.sub(r'\[[^\[\]]+\]','',text)
-    text = re.sub(r'#[A-Za-z ]*','',text)
+    text = re.sub(r'#.*','',text)
     values = re.findall(r'\b[A-Z\'-_]+\b',text)
     values = [v.lower().replace('_',' ').strip() for v in values]
     return(values)
@@ -47,6 +47,7 @@ def cookXml(filePath,rootTag,outFile):
     # Fix spaces in XML tags
     raw = re.sub(r'\s(?=[\s\w]*>)','_',raw)
 
+    # Remove comments
     lines = [l for l in raw.split('\n') if not l.startswith('#')]
     raw = '\n'.join(lines)
 
@@ -64,7 +65,7 @@ def cookXml(filePath,rootTag,outFile):
                 d.update({t.name : soupBranch(rootTag.find(t.name))})
             else:
                 pass
-                
+
 #        d = {t.name : soupBranch(rootTag.find(t.name)) for t in tags}
         res.update({ccode:d})
 
