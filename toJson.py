@@ -12,7 +12,7 @@ def ciParse(tagSoup):
     text = text.replace('.','')
     text = re.sub(r'\[[^\[\]]+\]','',text)
     text = re.sub(r'#[A-Za-z ]*','',text)
-    values = re.findall(r'\b[A-Z_]+\b',text)
+    values = re.findall(r'\b[A-Z\'-_]+\b',text)
     values = [v.lower().replace('_',' ').strip() for v in values]
     return(values)
     # 1 Detect format
@@ -44,7 +44,11 @@ def cookXml(filePath,rootTag,outFile):
     with open(filePath) as file:
         raw = file.read()
 
+    # Fix spaces in XML tags
     raw = re.sub(r'\s(?=[\s\w]*>)','_',raw)
+
+    lines = [l for l in raw.split('\n') if not l.startswith('#')]
+    raw = '\n'.join(lines)
 
     soup = bs(raw,'html.parser')
     rootTags = soup.findAll(rootTag)
@@ -53,7 +57,15 @@ def cookXml(filePath,rootTag,outFile):
     for rootTag in rootTags:
         tags = rootTag.findAll(recursive=False)
         ccode = tags[0].text
-        d = {t.name : soupBranch(rootTag.find(t.name)) for t in tags}
+
+        d = {}
+        for t in tags:
+            if t.name != 'doc' and t.name != 'comment':
+                d.update({t.name : soupBranch(rootTag.find(t.name))})
+            else:
+                pass
+                
+#        d = {t.name : soupBranch(rootTag.find(t.name)) for t in tags}
         res.update({ccode:d})
 
     if outFile == '.stdout':
