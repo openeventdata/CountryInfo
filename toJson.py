@@ -10,9 +10,14 @@ import json
 def ciParse(tagSoup):
     text = tagSoup.text
     text = text.replace('.','')
+    # Removes attribute tags (must go...)
     text = re.sub(r'\[[^\[\]]+\]','',text)
+    # Parses EOL comment sections into attribute tags...
+#    text = re.sub(r'(?<!^#)(?<=#)([^#]*)(?=\n)',r'[ATTR \1]',text)
+    # Removes all comments (keep after parsing all EOL-comments?)
     text = re.sub(r'#.*','',text)
-    values = re.findall(r'\b[A-Z\'-_]+\b',text)
+    # Extracts all names (here i'll make a list of dicts instead of the list of values)
+    values = re.findall(r'\b[A-Z\'\`\-_]+\b',text)
     values = [v.lower().replace('_',' ').strip() for v in values]
     return(values)
     # 1 Detect format
@@ -52,7 +57,7 @@ def cookXml(filePath,rootTag,outFile):
     raw = '\n'.join(lines)
 
     soup = bs(raw,'html.parser')
-    rootTags = soup.findAll(rootTag)
+    rootTags = soup.findAll(rootTag,recursive=False)
 
     res = {}
     for rootTag in rootTags:
