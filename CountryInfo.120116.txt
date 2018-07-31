@@ -772,7 +772,7 @@ Version History
 	</Personal representatives of the french coprince>
 	<Personal representative of the episcopal coprince>
 		NEMESI_MARQUES_OSTE_					[>19930101]  [B:19350101]
-	<Personal representative of the episcopal coprince>
+	</Personal representative of the episcopal coprince>
 	<First syndics (FROM 19930504, GENERAL_SYNDICS>
 		FRANCESC_ESCUDE_FERRERO_				[19661201 - 19721201]  [D:19960701]
 		JULIA_REIG-RIBO_						[19721201 - 19781229]
@@ -3418,6 +3418,7 @@ Version History
 <Capital>
 	SARAJEVO_
 </Capital>
+<doc>
 <Leaders>
 	<Presidents of the people'S_ASSEMBLY>
 #		DZEMAL_BIJEDIC_					[YUGBIHGOV 19670101 - 19710101] [YUGGOV 19710730 - 19770118]  [B:19170101]  [D:19770101]
@@ -3475,7 +3476,7 @@ Version History
 	<Co-PRIME_MINISTERS>
 		BORO_BOSIC_					[19970103 - 19990203]  [B:19500101]
 		SVETOZAR_MIHAJLOVIC_			[19990203 - 20000606]  [B:19490101]
-	<Co-PRIME_MINISTERS>
+	</Co-PRIME_MINISTERS>
 	<International high representatives>
 #			CARL_BILDT_						[19951214 - 19970618]  [B:19490101] # other politicians with same name
 		CARLOS_WESTENDORP_				[19970618 - 19990818]  [B:19370101]
@@ -3486,6 +3487,7 @@ Version History
 		MIROSLAV_LAJCAK_					[>20070702]  [B:19630101]
 	</International high representatives>
 </Leaders>
+</doc>
 <Government>
 #		ADNAN_TERZIC_	[BIHGOV <20070231]	# Chairman, Council of Ministers
 	AHMET_HADZIPASIC_	[BIHGOV 20030201 - 20070231]	# Prime Minister
@@ -4458,7 +4460,7 @@ Version History
 <Leaders>
 	<Administrators>
 		JOHN_SUTHERLAND_THOMSON_				[19670101 - 19710101]  [B:19200101]  [D:20080101]
-	<Administrators>
+	</Administrators>
 	<Governors>
 		DEREK_GEORGE_CUDMORE_				[19710101 - 19740101]  [B:19230101]  [D:19810101]
 		WALTER_WILKINSON_WALLACE_			[19740701 - 19781001]  [B:19230101]  [D:20050101]
@@ -4609,7 +4611,7 @@ Version History
 		ZHELYU_ZHELEV_				[19900801 - 19970122]  [B:19350101]
 		PETUR_STOYANOV_				[19970122 - 20020122]  [B:19520101]
 		GEORGI_PURVANOV_				[>20020122]  [B:19570101]
-	<Presidents>
+	</Presidents>
 	<Chairmen of the council of ministers (PREMIERS>
 		TODOR_ZHIVKOV_				[19621127 - 19710709]
 		STANKO_TODOROV_				[19710709 - 19810618]
@@ -5733,7 +5735,7 @@ Version History
 		BRUCE_DINWIDDY_					[20020529 - 20051028]  [B:19460101]
 		GEORGE_MCCARTHY_					[20051028 - 20051123]
 		STUART_JACK_						[>20051123]  [B:19490101] # too common
-	<Governors>
+	</Governors>
 <Leaders of government business (OFFICIAL_POST_FROM 20030630>
 		THOMAS_C._JEFFERSON_				[19921101 - 19940101]  [B:19410101]  [D:20060101]
 		TRUMAN_BODDEN_					[19940101 - 20001121]  [B:19450101]
@@ -20439,7 +20441,7 @@ Pres.
 	</Presidents>
 	<Chairman of the national salvation council>
 		IBRAHIM_BARE_MAINASSARA_		[19960127 - 19960807]  [B:19490101]  [D:19990101]
-	<Chairman of the national salvation council>
+	</Chairman of the national salvation council>
 	<President>
 		IBRAHIM_BARE_MAINASSARA_		[19960807 - 19990409]
 	</President>
@@ -29386,7 +29388,7 @@ Pres.
 <CountryCode>USA</CountryCode>
 <CountryName>UNITED_STATES_OF_AMERICA</CountryName>
 <COW-Alpha>USA</COW-Alpha>
-<Doc><Government> field does not contain information on USA: see details in original file PAS 2012.01.06 </Doc>
+#<Government> field does not contain information on USA: see details in original file PAS 2012.01.06
 <FIPS-10>US</FIPS-10>
 <IMF>111</IMF>
 <ISO3166-alpha2>US</ISO3166-alpha2>
@@ -30935,17 +30937,7 @@ Pres.
 	</Chairmen of the presidium of the supreme people'S_COUNCIL>
 	<Prime ministers>
 		YASIN_SAID_NUMAN_					[19860208 - 19900522]
-	</Prime ministers>
-	<Presidents>
-		ALI_ABDULLAH_SALEH_					[19780718 - 19900522]  [B:19420101]
-	</Presidents>
-	<Prime ministers>
 		ABDUL_AZIZ_ABDUL_GHANI_				[19831113 - 19900522]  [B:19390101]
-	</Prime ministers>
-	<President>
-		ALI_ABDULLAH_SALEH_					[>19900522]
-	</President>
-	<Prime ministers>
 		HAIDAR_ABU_BAKR_AL-ATTAS_			[19900522 - 19940509]
 		MUHAMMAD_SAID_AL-ATTAR_				[19940509 - 19941006]  [B:19270101]
 		ABDUL_AZIZ_ABDUL_GHANI_				[19941006 - 19970514]
@@ -30953,12 +30945,12 @@ Pres.
 		ABDUL_KARIM_AL-IRYANI_				[19980429 - 20010407]
 		ABDUL_QADER_BAJAMAL_					[20010407 - 20070407]  [B:19460101]
 		ALI_MUHAMMAD_MUJAWAR_				[>20070407]  [B:19530101]
-	</Prime ministers>
-	<President>
-		ALI_SALIM_AL-BAIDH_					[19940521 - 19940707]  [B:19390101]
-	<Prime minister>
 		HAIDAR_ABU_BAKR_AL-ATTAS_			[19940521 - 19940707]
-	</Prime minister>
+	</Prime ministers>
+	<Presidents>
+		ALI_ABDULLAH_SALEH_					[19780718 - 19900522]  [B:19420101]
+		ALI_SALIM_AL-BAIDH_					[19940521 - 19940707]  [B:19390101]
+	</Presidents>
 </Leaders>
 <Government>
 	ABDALLAH_AHMAD_AL_GHANIM_	[YEMGOV <20030531]	# Minister of Legal Affairs
