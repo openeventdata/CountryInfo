@@ -4,22 +4,80 @@ from bs4 import BeautifulSoup as bs
 import sys
 import os
 import fire
+import numpy as np
 
 import json
 
+def quickRe(*args):
+    m = re.search(*args)
+    if m is not None:
+        o = m[0]
+    else:
+        o = ''
+    return(o)
+
+def formatName(name):
+    if '{' in name:
+        names = re.findall('(?<=\{)[^\}]+(?=\})',name)
+        name = '|'.join(names)
+    else:
+        pass
+    name = re.sub(r'[\'\´\`]','',name)
+    name = re.sub(r'[^A-Za-z \|]','_',name)
+    name = re.sub('__+','_',name)
+    name = name.lower()
+    return(name)
+
+def ciParseLine(line):
+    name = quickRe(r'^[^[\n]+',line).strip()
+    name = formatName(name)
+
+    description = quickRe(r'(?<=\[DESCR )[^\]]+(?=\])',line).strip()
+
+    years = re.search(r'(?<=\[)[A-Za-z_ ]*(?P<start>[0-9]{8}) - (?P<end>[0-9]{8})(?=\])',line)
+    if years:
+        startYr = years['start']
+        endYr = years['end']
+    else:
+        year = re.search(r'(?<=\[)[A-Za-z_ ]*(<|>)(?P<start>[0-9]{8})(?=\])',line)
+        if year:
+            startYr = year['start']
+            endYr = '20161201'
+        else:
+            print(line)
+            startYr = ''
+            endYr = ''
+
+    if name == '' and description == '':
+        entry = None
+    else:
+        entry = {'name':name,'description':description,'startYr':startYr,'endYr':endYr}
+
+    return(entry)
+
 def ciParse(tagSoup):
     text = tagSoup.text
-    text = text.replace('.','')
-    # Removes attribute tags (must go...)
-    text = re.sub(r'\[[^\[\]]+\]','',text)
-    # Parses EOL comment sections into attribute tags...
-#    text = re.sub(r'(?<!^#)(?<=#)([^#]*)(?=\n)',r'[ATTR \1]',text)
+    # Removes attribute tags (must go...but not yet)
+#    text = re.sub(r'\[[^\[\]]+\]','',text)
+    # Parses EOL comment sections (description) into attribute tags...
+    text = re.sub(r'(?<!^)#([^#\n]*)(?=\n)',r'[DESCR \1]',text)
     # Removes all comments (keep after parsing all EOL-comments?)
-    text = re.sub(r'#.*','',text)
-    # Extracts all names (here i'll make a list of dicts instead of the list of values)
-    values = re.findall(r'\b[A-Z\'\`\-_]+\b',text)
-    values = [v.lower().replace('_',' ').strip() for v in values]
-    return(values)
+#    text = re.sub(r'#.*','',text)
+
+    text = text.split('\n')
+
+    entries = [ciParseLine(l) for l in text]
+    entries = [e for e in entries if e != None]
+#    if len(entries) == 1:
+#        entries = entries[0]
+#    else:
+#        pass
+
+#    description = quickRe(r'(?<=\[DESCR )[^\]]+(?=\])',text)
+
+#    values = re.findall(r'\b[A-Z\'\`\-_]+\b',text)
+#    values = [v.lower().replace('_',' ').strip() for v in values]
+    return(entries)
     # 1 Detect format
     # 2 reparse into list of dictionaries
 
