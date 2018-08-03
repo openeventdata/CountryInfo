@@ -56,30 +56,35 @@ def ciParseLine(line):
     return(entry)
 
 def ciParse(tagSoup):
+    # Where the magic happens
     text = tagSoup.text
-    # Removes attribute tags (must go...but not yet)
-#    text = re.sub(r'\[[^\[\]]+\]','',text)
+
+    # Removes attribute tags
+    #text = re.sub(r'\[[^\[\]]+\]','',text)
+
     # Parses EOL comment sections (description) into attribute tags...
     text = re.sub(r'(?<!^)#([^#\n]*)(?=\n)',r'[DESCR \1]',text)
+
     # Removes all comments (keep after parsing all EOL-comments?)
-#    text = re.sub(r'#.*','',text)
+    # text = re.sub(r'#.*','',text)
 
     text = text.split('\n')
 
     entries = [ciParseLine(l) for l in text]
     entries = [e for e in entries if e != None]
+
 #    if len(entries) == 1:
 #        entries = entries[0]
 #    else:
 #        pass
-
-#    description = quickRe(r'(?<=\[DESCR )[^\]]+(?=\])',text)
 
 #    values = re.findall(r'\b[A-Z\'\`\-_]+\b',text)
 #    values = [v.lower().replace('_',' ').strip() for v in values]
     return(entries)
     # 1 Detect format
     # 2 reparse into list of dictionaries
+
+#####################################
 
 def soupLeaf(tagSoup):
     if len(tagSoup) == 1:
@@ -97,6 +102,8 @@ def soupBranch(tagSoup):
         tagCont = {tag.name : soupBranch(tag) for tag in tags}
 
     return(tagCont)
+
+#####################################
 
 def cookXml(filePath,rootTag,outFile):
 
@@ -129,7 +136,6 @@ def cookXml(filePath,rootTag,outFile):
             else:
                 pass
 
-#        d = {t.name : soupBranch(rootTag.find(t.name)) for t in tags}
         res.update({ccode:d})
 
     if outFile == '.stdout':
@@ -137,6 +143,8 @@ def cookXml(filePath,rootTag,outFile):
     else:
         with open(outFile,'w') as file:
             json.dump(res,file)
+
+#####################################
 
 if __name__ == '__main__':
 
